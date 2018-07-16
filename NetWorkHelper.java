@@ -1,4 +1,4 @@
-package cn.hnust.weather.wechat;
+ï»¿package cn.hnust.weather.wechat;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -38,16 +38,16 @@ public class NetWorkHelper {
                 }
             });
  
-            con.setDoInput(true); //ÔÊĞíÊäÈëÁ÷£¬¼´ÔÊĞíÏÂÔØ
+            con.setDoInput(true); //å…è®¸è¾“å…¥æµï¼Œå³å…è®¸ä¸‹è½½
  
-            //ÔÚandroidÖĞ±ØĞë½«´ËÏîÉèÖÃÎªfalse
-            con.setDoOutput(true); //ÔÊĞíÊä³öÁ÷£¬¼´ÔÊĞíÉÏ´«
-            con.setUseCaches(false); //²»Ê¹ÓÃ»º³å
+            //åœ¨androidä¸­å¿…é¡»å°†æ­¤é¡¹è®¾ç½®ä¸ºfalse
+            con.setDoOutput(true); //å…è®¸è¾“å‡ºæµï¼Œå³å…è®¸ä¸Šä¼ 
+            con.setUseCaches(false); //ä¸ä½¿ç”¨ç¼“å†²
             if(null!=requestMethod && !requestMethod.equals("")) {
-                con.setRequestMethod(requestMethod); //Ê¹ÓÃÖ¸¶¨µÄ·½Ê½
+                con.setRequestMethod(requestMethod); //ä½¿ç”¨æŒ‡å®šçš„æ–¹å¼
             }
             else{
-                con.setRequestMethod("GET"); //Ê¹ÓÃgetÇëÇó
+                con.setRequestMethod("GET"); //ä½¿ç”¨getè¯·æ±‚
             }
             
             con.setRequestProperty("Content-Type","application/json");  
@@ -59,7 +59,7 @@ public class NetWorkHelper {
             out.flush();   
             out.close();   
             
-            is = con.getInputStream();   //»ñÈ¡ÊäÈëÁ÷£¬´ËÊ±²ÅÕæÕı½¨Á¢Á´½Ó
+            is = con.getInputStream();   //è·å–è¾“å…¥æµï¼Œæ­¤æ—¶æ‰çœŸæ­£å»ºç«‹é“¾æ¥
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader bufferReader = new BufferedReader(isr);
             String inputLine = "";
@@ -104,19 +104,19 @@ public class NetWorkHelper {
                 }
             });
  
-            con.setDoInput(true); //ÔÊĞíÊäÈëÁ÷£¬¼´ÔÊĞíÏÂÔØ
+            con.setDoInput(true); //å…è®¸è¾“å…¥æµï¼Œå³å…è®¸ä¸‹è½½
  
-            //ÔÚandroidÖĞ±ØĞë½«´ËÏîÉèÖÃÎªfalse
-            con.setDoOutput(false); //ÔÊĞíÊä³öÁ÷£¬¼´ÔÊĞíÉÏ´«
-            con.setUseCaches(false); //²»Ê¹ÓÃ»º³å
+            //åœ¨androidä¸­å¿…é¡»å°†æ­¤é¡¹è®¾ç½®ä¸ºfalse
+            con.setDoOutput(false); //å…è®¸è¾“å‡ºæµï¼Œå³å…è®¸ä¸Šä¼ 
+            con.setUseCaches(false); //ä¸ä½¿ç”¨ç¼“å†²
             if(null!=requestMethod && !requestMethod.equals("")) {
-                con.setRequestMethod(requestMethod); //Ê¹ÓÃÖ¸¶¨µÄ·½Ê½
+                con.setRequestMethod(requestMethod); //ä½¿ç”¨æŒ‡å®šçš„æ–¹å¼
             }
             else{
-                con.setRequestMethod("GET"); //Ê¹ÓÃgetÇëÇó
+                con.setRequestMethod("GET"); //ä½¿ç”¨getè¯·æ±‚
             }
             
-            is = con.getInputStream();   //»ñÈ¡ÊäÈëÁ÷£¬´ËÊ±²ÅÕæÕı½¨Á¢Á´½Ó
+            is = con.getInputStream();   //è·å–è¾“å…¥æµï¼Œæ­¤æ—¶æ‰çœŸæ­£å»ºç«‹é“¾æ¥
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader bufferReader = new BufferedReader(isr);
             String inputLine = "";

@@ -1,4 +1,4 @@
-package cn.hnust.weather.wechat;
+ï»¿package cn.hnust.weather.wechat;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -18,53 +18,53 @@ import java.util.List;
 import java.util.Map;
  
  /**
-  * ÏûÏ¢´¦Àí¹¤¾ßÀà
+  * æ¶ˆæ¯å¤„ç†å·¥å…·ç±»
   * Created by xdp on 2016/1/26.
   */
  public class MessageHandlerUtil {
  
      /**
-      * ½âÎöÎ¢ĞÅ·¢À´µÄÇëÇó£¨XML£©
+      * è§£æå¾®ä¿¡å‘æ¥çš„è¯·æ±‚ï¼ˆXMLï¼‰
       * @param request
       * @return map
       * @throws Exception
       */
      public static Map<String,String> parseXml(HttpServletRequest request) throws Exception {
-         // ½«½âÎö½á¹û´æ´¢ÔÚHashMapÖĞ
+         // å°†è§£æç»“æœå­˜å‚¨åœ¨HashMapä¸­
          Map<String,String> map = new HashMap();
-         // ´ÓrequestÖĞÈ¡µÃÊäÈëÁ÷
+         // ä»requestä¸­å–å¾—è¾“å…¥æµ
          InputStream inputStream = request.getInputStream();
-         System.out.println("»ñÈ¡ÊäÈëÁ÷");
-         // ¶ÁÈ¡ÊäÈëÁ÷
+         System.out.println("è·å–è¾“å…¥æµ");
+         // è¯»å–è¾“å…¥æµ
          SAXReader reader = new SAXReader();
          Document document = reader.read(inputStream);
-         // µÃµ½xml¸ùÔªËØ
+         // å¾—åˆ°xmlæ ¹å…ƒç´ 
          Element root = document.getRootElement();
-         // µÃµ½¸ùÔªËØµÄËùÓĞ×Ó½Úµã
+         // å¾—åˆ°æ ¹å…ƒç´ çš„æ‰€æœ‰å­èŠ‚ç‚¹
          List<Element> elementList = root.elements();
  
-         // ±éÀúËùÓĞ×Ó½Úµã
+         // éå†æ‰€æœ‰å­èŠ‚ç‚¹
          for (Element e : elementList) {
              System.out.println(e.getName() + "|" + e.getText());
              map.put(e.getName(), e.getText());
          }
  
-         // ÊÍ·Å×ÊÔ´
+         // é‡Šæ”¾èµ„æº
          inputStream.close();
          inputStream = null;
          return map;
      }
  
-     // ¸ù¾İÏûÏ¢ÀàĞÍ ¹¹Ôì·µ»ØÏûÏ¢
+     // æ ¹æ®æ¶ˆæ¯ç±»å‹ æ„é€ è¿”å›æ¶ˆæ¯
      public static String buildXml(Map<String,String> map) {
          String result;
          String msgType = map.get("MsgType").toString();
          System.out.println("MsgType:" + msgType);
          if(msgType.toUpperCase().equals("TEXT")){
-             result = buildTextMessage(map, "Âõ°Á¿Æ¼¼-Âõ°ÁÊÒ½ç");
+             result = buildTextMessage(map, "è¿ˆå‚²ç§‘æŠ€-è¿ˆå‚²å®¤ç•Œ");
          }else{
              String fromUserName = map.get("FromUserName");
-             // ¿ª·¢ÕßÎ¢ĞÅºÅ
+             // å¼€å‘è€…å¾®ä¿¡å·
              String toUserName = map.get("ToUserName");
              result = String
                      .format(
@@ -76,15 +76,15 @@ import java.util.Map;
                                      "<Content><![CDATA[%s]]></Content>" +
                                      "</xml>",
                              fromUserName, toUserName, getUtcTime(),
-                             "Çë»Ø¸´ÈçÏÂ¹Ø¼ü´Ê£º\nÎÄ±¾\nÍ¼Æ¬\nÓïÒô\nÊÓÆµ\nÒôÀÖ\nÍ¼ÎÄ");
+                             "è¯·å›å¤å¦‚ä¸‹å…³é”®è¯ï¼š\næ–‡æœ¬\nå›¾ç‰‡\nè¯­éŸ³\nè§†é¢‘\néŸ³ä¹\nå›¾æ–‡");
          }
  
          return result;
      }
  
      private static String getUtcTime() {
-         Date dt = new Date();// Èç¹û²»ĞèÒª¸ñÊ½,¿ÉÖ±½ÓÓÃdt,dt¾ÍÊÇµ±Ç°ÏµÍ³Ê±¼ä
-         DateFormat df = new SimpleDateFormat("yyyyMMddhhmm");// ÉèÖÃÏÔÊ¾¸ñÊ½
+         Date dt = new Date();// å¦‚æœä¸éœ€è¦æ ¼å¼,å¯ç›´æ¥ç”¨dt,dtå°±æ˜¯å½“å‰ç³»ç»Ÿæ—¶é—´
+         DateFormat df = new SimpleDateFormat("yyyyMMddhhmm");// è®¾ç½®æ˜¾ç¤ºæ ¼å¼
          String nowTime = df.format(dt);
          long dd = (long) 0;
          try {
@@ -96,54 +96,54 @@ import java.util.Map;
      }
      
      public enum MessageType {
-		 TEXT,//ÎÄ±¾ÏûÏ¢
-		 IMAGE,//Í¼Æ¬ÏûÏ¢
-		 VOICE,//ÓïÒôÏûÏ¢
-		 VIDEO,//ÊÓÆµÏûÏ¢
-		 SHORTVIDEO,//Ğ¡ÊÓÆµÏûÏ¢
-		 LOCATION,//µØÀíÎ»ÖÃÏûÏ¢
-		 LINK,//Á´½ÓÏûÏ¢
-		 EVENT//ÊÂ¼şÏûÏ¢
+		 TEXT,//æ–‡æœ¬æ¶ˆæ¯
+		 IMAGE,//å›¾ç‰‡æ¶ˆæ¯
+		 VOICE,//è¯­éŸ³æ¶ˆæ¯
+		 VIDEO,//è§†é¢‘æ¶ˆæ¯
+		 SHORTVIDEO,//å°è§†é¢‘æ¶ˆæ¯
+		 LOCATION,//åœ°ç†ä½ç½®æ¶ˆæ¯
+		 LINK,//é“¾æ¥æ¶ˆæ¯
+		 EVENT//äº‹ä»¶æ¶ˆæ¯
 	}
 	
 	/**
-	 * ¸ù¾İÏûÏ¢ÀàĞÍ¹¹Ôì·µ»ØÏûÏ¢
-	 * @param map ·â×°ÁË½âÎö½á¹ûµÄMap
-	 * @return responseMessage(ÏìÓ¦ÏûÏ¢)
+	 * æ ¹æ®æ¶ˆæ¯ç±»å‹æ„é€ è¿”å›æ¶ˆæ¯
+	 * @param map å°è£…äº†è§£æç»“æœçš„Map
+	 * @return responseMessage(å“åº”æ¶ˆæ¯)
 	 */
 	 public static String buildResponseMessage(Map map) {
-		 //ÏìÓ¦ÏûÏ¢
+		 //å“åº”æ¶ˆæ¯
 		 String responseMessage = "";
-	 	//µÃµ½ÏûÏ¢ÀàĞÍ
+	 	//å¾—åˆ°æ¶ˆæ¯ç±»å‹
 		 String msgType = map.get("MsgType").toString();
 		 System.out.println("MsgType:" + msgType);
-		 //ÏûÏ¢ÀàĞÍ
+		 //æ¶ˆæ¯ç±»å‹
 		 MessageType messageEnumType = MessageType.valueOf(MessageType.class, msgType.toUpperCase());
 		 switch (messageEnumType) {
 		 	case TEXT:
-		 		//´¦ÀíÎÄ±¾ÏûÏ¢
+		 		//å¤„ç†æ–‡æœ¬æ¶ˆæ¯
 		 		responseMessage = handleTextMessage(map);
 		 		break;
 		 	default:
 		 		break;
 		 }
-		 //·µ»ØÏìÓ¦ÏûÏ¢
+		 //è¿”å›å“åº”æ¶ˆæ¯
 		 return responseMessage;
 	}
 	 
 	 /**
-	 	* ½ÓÊÕµ½ÎÄ±¾ÏûÏ¢ºó´¦Àí
-	 	* @param map ·â×°ÁË½âÎö½á¹ûµÄMap
+	 	* æ¥æ”¶åˆ°æ–‡æœ¬æ¶ˆæ¯åå¤„ç†
+	 	* @param map å°è£…äº†è§£æç»“æœçš„Map
 		* @return
 		*/
 	 private static String handleTextMessage(Map<String, String> map) {
-		 //ÏìÓ¦ÏûÏ¢
+		 //å“åº”æ¶ˆæ¯
 		 String responseMessage="";
-		 // ÏûÏ¢ÄÚÈİ
+		 // æ¶ˆæ¯å†…å®¹
 		 String content = map.get("MsgType");
 		 
 		 	if(content.equals("text")){
-		 		String msgText = map.get("Content")+ "»¶Ó­\n";
+		 		String msgText = map.get("Content")+ "æ¬¢è¿\n";
 		 		
 		 		//String s1=null,s2=null;
 		 		//try {
@@ -156,37 +156,37 @@ import java.util.Map;
 			 	//}
 		 		
 		 		//if(msgText.length()<500){
-		 		//     msgText = msgText + "\n"+  "<a href=\"http://tsn.baidu.com/text2audio?lan=zh&vol=9&tok=24.002396bd370b62ad1144b520c9ad70c7.2592000.1486037637.282335-9158560&ctp=1&cuid=1&tex=" + s2 + "\" target=\"_blank\">µã»÷²¥·ÅÉùÒô</a>";
+		 		//     msgText = msgText + "\n"+  "<a href=\"http://tsn.baidu.com/text2audio?lan=zh&vol=9&tok=24.002396bd370b62ad1144b520c9ad70c7.2592000.1486037637.282335-9158560&ctp=1&cuid=1&tex=" + s2 + "\" target=\"_blank\">ç‚¹å‡»æ’­æ”¾å£°éŸ³</a>";
 		 		//}
 		 		
 		 		responseMessage = buildTextMessage(map, msgText);
 		 	}
-/*		 	case "Í¼Æ¬":
-		 		//Í¨¹ıËØ²Ä¹ÜÀí½Ó¿ÚÉÏ´«Í¼Æ¬Ê±µÃµ½µÄmedia_id
+/*		 	case "å›¾ç‰‡":
+		 		//é€šè¿‡ç´ æç®¡ç†æ¥å£ä¸Šä¼ å›¾ç‰‡æ—¶å¾—åˆ°çš„media_id
 		 		String imgMediaId = "dSQCiEHYB-pgi7ib5KpeoFlqpg09J31H28rex6xKgwWrln3HY0BTsoxnRV-xC_SQ";
 		 		responseMessage = buildImageMessage(map, imgMediaId);
 		 		break;
 */		 	if(content.equals("voice")){ 
-		 		//Í¨¹ıËØ²Ä¹ÜÀí½Ó¿ÚÉÏ´«ÓïÒôÎÄ¼şÊ±µÃµ½µÄmedia_id
+		 		//é€šè¿‡ç´ æç®¡ç†æ¥å£ä¸Šä¼ è¯­éŸ³æ–‡ä»¶æ—¶å¾—åˆ°çš„media_id
 		 		String voiceMediaId = "h3ul0TnwaRPut6Tl1Xlf0kk_9aUqtQvfM5Oq21unoWqJrwks505pkMGMbHnCHBBZ";
 //		 		responseMessage = buildVoiceMessage(map,voiceMediaId);
 		 		}
-/*		 	case "Í¼ÎÄ":
+/*		 	case "å›¾æ–‡":
 		 		responseMessage = buildNewsMessage(map);
 		 		break;
-		 	case "ÒôÀÖ":
+		 	case "éŸ³ä¹":
 		 		Music music = new Music();
-		 		music.title = "ÕÔÀöÓ±¡¢ĞíÖ¾°² - ÂÒÊÀ¾ãÃğ";
-		 		music.description = "µçÊÓ¾ç¡¶ÊñÉ½Õ½¼Í¡·²åÇú";
+		 		music.title = "èµµä¸½é¢–ã€è®¸å¿—å®‰ - ä¹±ä¸–ä¿±ç­";
+		 		music.description = "ç”µè§†å‰§ã€Šèœ€å±±æˆ˜çºªã€‹æ’æ›²";
 		 		music.musicUrl = "http://gacl.ngrok.natapp.cn/music/music.mp3";
 		 		music.hqMusicUrl = "http://gacl.ngrok.natapp.cn/music/music.mp3";
 		 		responseMessage = buildMusicMessage(map, music);
 		 		break;
-		 	case "ÊÓÆµ":
+		 	case "è§†é¢‘":
 		 		Video video = new Video();
 		 		video.mediaId = "GqmIGpLu41rtwaY7WCVtJAL3ZbslzKiuLEXfWIKYDnHXGObH1CBH71xtgrGwyCa3";
-		 		video.title = "Ğ¡Æ»¹û";
-		 		video.description = "Ğ¡Æ»¹û¸ãĞ¦ÊÓÆµ";
+		 		video.title = "å°è‹¹æœ";
+		 		video.description = "å°è‹¹æœæç¬‘è§†é¢‘";
 		 		responseMessage = buildVideoMessage(map, video);
 		 		break;
 		 	
@@ -196,24 +196,24 @@ import java.util.Map;
 		 	*/
 		 
 
-		 //·µ»ØÏìÓ¦ÏûÏ¢
+		 //è¿”å›å“åº”æ¶ˆæ¯
 		 return responseMessage;
 	 }
 	 
 	 
 	 /**
-	 * ¹¹ÔìÎÄ±¾ÏûÏ¢
-	 * @param map ·â×°ÁË½âÎö½á¹ûµÄMap
-	 * @param content ÎÄ±¾ÏûÏ¢ÄÚÈİ
-	 * @return ÎÄ±¾ÏûÏ¢XML×Ö·û´®
+	 * æ„é€ æ–‡æœ¬æ¶ˆæ¯
+	 * @param map å°è£…äº†è§£æç»“æœçš„Map
+	 * @param content æ–‡æœ¬æ¶ˆæ¯å†…å®¹
+	 * @return æ–‡æœ¬æ¶ˆæ¯XMLå­—ç¬¦ä¸²
 	 */
 	 private static String buildTextMessage(Map<String, String> map, String content) {
-		 //·¢ËÍ·½ÕÊºÅ
+		 //å‘é€æ–¹å¸å·
 		 String fromUserName = map.get("FromUserName");
-		 // ¿ª·¢ÕßÎ¢ĞÅºÅ
+		 // å¼€å‘è€…å¾®ä¿¡å·
 		 String toUserName = map.get("ToUserName");
 		 /**
-		  * ÎÄ±¾ÏûÏ¢XMLÊı¾İ¸ñÊ½
+		  * æ–‡æœ¬æ¶ˆæ¯XMLæ•°æ®æ ¼å¼
 		  * <xml>
 	 		<ToUserName><![CDATA[toUser]]></ToUserName>
 			<FromUserName><![CDATA[fromUser]]></FromUserName>
